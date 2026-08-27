@@ -14,14 +14,11 @@ st.set_page_config(
     layout="wide"
 )
 
-# ---------------------------
-# Monochromatic Paper Background & Custom Styles
-# ---------------------------
+# Custom Styles
 newspaper_bg = "https://images.unsplash.com/photo-1504711434969-e33886168f5c?q=80&w=1920&auto=format&fit=crop"
 
 st.markdown(f"""
     <style>
-    /* Monochromatic Paper Tint Backdrop */
     .stApp {{
         background: linear-gradient(180deg, rgba(15, 23, 42, 0.88) 0%, rgba(15, 23, 42, 0.93) 100%), 
                     url("{newspaper_bg}");
@@ -30,21 +27,15 @@ st.markdown(f"""
         background-attachment: fixed;
         color: #ffffff;
     }}
-
     .stApp::before {{
         content: "";
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        top: 0; left: 0; width: 100%; height: 100%;
         backdrop-filter: grayscale(100%) contrast(105%);
         -webkit-backdrop-filter: grayscale(100%) contrast(105%);
         pointer-events: none;
         z-index: 0;
     }}
-    
-    /* Layout Alignment */
     .main .block-container {{
         max-width: 850px;
         padding-top: 2.5rem;
@@ -52,8 +43,6 @@ st.markdown(f"""
         position: relative;
         z-index: 1;
     }}
-    
-    /* Dark Header Card */
     .hero-card {{
         background: rgba(10, 10, 14, 0.75);
         border: 1px solid rgba(56, 189, 248, 0.4);
@@ -67,38 +56,11 @@ st.markdown(f"""
         box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.15);
         margin-bottom: 2rem;
     }}
-    .hero-left {{
-        display: flex;
-        align-items: center;
-        gap: 15px;
-    }}
-    .lens-icon {{
-        font-size: 2.6rem;
-        filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.6));
-    }}
-    .hero-title {{
-        font-size: 2.8rem;
-        font-weight: 800;
-        color: #ffffff;
-        letter-spacing: -0.5px;
-        line-height: 1;
-        margin: 0;
-    }}
-    .hero-subtitle {{
-        color: #38bdf8;
-        font-size: 0.95rem;
-        font-weight: 600;
-        margin-top: 6px;
-        letter-spacing: 0.2px;
-    }}
-    .reader-img {{
-        width: 85px;
-        height: auto;
-        opacity: 0.9;
-        filter: drop-shadow(0px 4px 10px rgba(0,0,0,0.5));
-    }}
-    
-    /* Input Box Styling */
+    .hero-left {{ display: flex; align-items: center; gap: 15px; }}
+    .lens-icon {{ font-size: 2.6rem; filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.6)); }}
+    .hero-title {{ font-size: 2.8rem; font-weight: 800; color: #ffffff; margin: 0; line-height: 1; }}
+    .hero-subtitle {{ color: #38bdf8; font-size: 0.95rem; font-weight: 600; margin-top: 6px; }}
+    .reader-img {{ width: 85px; height: auto; opacity: 0.9; }}
     .stTextArea textarea {{
         background-color: rgba(10, 10, 14, 0.75) !important;
         border: 1px solid rgba(56, 189, 248, 0.3) !important;
@@ -111,8 +73,6 @@ st.markdown(f"""
         border-color: #38bdf8 !important;
         box-shadow: 0 0 12px rgba(56, 189, 248, 0.35) !important;
     }}
-    
-    /* Cyan Action Button */
     .stButton>button {{
         width: 100%;
         background: linear-gradient(90deg, #0ea5e9 0%, #0284c7 100%);
@@ -122,16 +82,8 @@ st.markdown(f"""
         border-radius: 10px;
         padding: 0.75rem 1rem;
         border: none;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        box-shadow: 0 4px 15px rgba(14, 165, 233, 0.4);
         margin-top: 0.5rem;
     }}
-    .stButton>button:hover {{
-        transform: translateY(-1px);
-        box-shadow: 0 6px 20px rgba(14, 165, 233, 0.6);
-    }}
-
-    /* Monitored Network Badges */
     .domain-tag {{
         display: inline-block;
         background: rgba(10, 10, 14, 0.75);
@@ -142,14 +94,7 @@ st.markdown(f"""
         font-weight: 600;
         margin: 3px;
         border: 1px solid rgba(56, 189, 248, 0.3);
-        transition: border-color 0.2s ease, color 0.2s ease;
     }}
-    .domain-tag:hover {{
-        border-color: #38bdf8;
-        color: #38bdf8;
-    }}
-    
-    /* Sidebar Styling */
     section[data-testid="stSidebar"] {{
         background-color: rgba(10, 10, 14, 0.95);
         border-right: 1px solid rgba(255, 255, 255, 0.08);
@@ -158,12 +103,29 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # ---------------------------
-# Monitored Domains List
+# Monitored Outlets & Keywords
 # ---------------------------
 trusted_domains = [
-    "bbc.com", "reuters.com", "ndtv.com", 
-    "thehindu.com", "hindustantimes.com", "timesofindia.com",
-    "indiatoday.in", "news18.com", "aljazeera.com", "cnn.com"
+    "bbc.com", "reuters.com", "ndtv.com", "thehindu.com", 
+    "hindustantimes.com", "timesofindia.com", "indiatoday.in", 
+    "news18.com", "aljazeera.com", "cnn.com"
+]
+
+trusted_brands = [
+    "bbc", "reuters", "ndtv", "the hindu", "hindustan times", 
+    "times of india", "india today", "news18", "al jazeera", 
+    "cnn", "economist", "dw", "boom", "indian express"
+]
+
+STOP_WORDS = {
+    "is", "are", "was", "were", "did", "does", "do", "the", "a", "an",
+    "really", "true", "false", "fake", "news", "what", "where", "who", "when", "how", "why"
+}
+
+# Expanded list of action words to check for rumor validation
+SENSITIVE_ACTIONS = [
+    "die", "died", "dead", "death", "killed", "kill", "passed away", 
+    "arrested", "arrest", "resigned", "resign", "hospitalized", "crash", "crashed"
 ]
 
 # ---------------------------
@@ -172,22 +134,16 @@ trusted_domains = [
 with st.sidebar:
     st.image("https://img.icons8.com/isometric/100/search.png", width=50)
     st.title("TruthLens")
-    st.caption("v2.0 • Credibility Engine")
+    st.caption("v2.0 • Real-Time Engine")
     st.divider()
-    
     st.markdown("### 🌐 Monitored Outlets")
     for d in trusted_domains:
         st.markdown(f'<span class="domain-tag">🟢 {d}</span>', unsafe_allow_html=True)
-        
-    st.divider()
-    st.info("💡 Real-time news cross-checking database.")
 
 # ---------------------------
-# Hero Header Section
+# Hero Section
 # ---------------------------
-newspaper_reader_icon = "https://cdn-icons-png.flaticon.com/512/2965/2965879.png"
-
-st.markdown(f"""
+st.markdown("""
     <div class="hero-card">
         <div class="hero-left">
             <span class="lens-icon">🔍</span>
@@ -196,155 +152,177 @@ st.markdown(f"""
                 <div class="hero-subtitle">Real-Time News Verification & Fact-Checking</div>
             </div>
         </div>
-        <img src="{newspaper_reader_icon}" class="reader-img" alt="Reading Newspaper">
+        <img src="https://cdn-icons-png.flaticon.com/512/2965/2965879.png" class="reader-img" alt="Newspaper">
     </div>
 """, unsafe_allow_html=True)
 
 # ---------------------------
-# Backend Extraction & Analysis Logic
+# Processing Helpers
 # ---------------------------
-def extract_title_and_domain(url):
-    """Extracts page title and base domain from news URLs."""
+def scrape_article_data(url):
     try:
-        parsed_url = urlparse(url)
-        domain = parsed_url.netloc.replace("www.", "")
-        
+        domain = urlparse(url).netloc.replace("www.", "")
         headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
-        response = requests.get(url, headers=headers, timeout=6)
-        soup = BeautifulSoup(response.text, "html.parser")
+        resp = requests.get(url, headers=headers, timeout=6)
+        soup = BeautifulSoup(resp.text, "html.parser")
         
         title = soup.title.string if soup.title else ""
         if not title and soup.find("h1"):
             title = soup.find("h1").text
-            
         title = re.sub(r'\s+', ' ', title).strip()
+        
         return title, domain
-    except:
+    except Exception:
         return "", ""
 
-def clean_search_query(text):
-    """Removes special characters/quotes and limits search key terms for valid RSS matching."""
-    cleaned = re.sub(r'[^\w\s]', '', text)
-    cleaned = re.sub(r'\s+', ' ', cleaned).strip()
-    words = cleaned.split()
-    return " ".join(words[:8])
+def fetch_rss_feed(query):
+    encoded_query = quote(query)
+    url = f"https://news.google.com/rss/search?q={encoded_query}&hl=en-IN&gl=IN&ceid=IN:en"
+    feed = feedparser.parse(url)
+    results = []
+    if hasattr(feed, 'entries'):
+        for entry in feed.entries:
+            source_name = getattr(entry, 'source', {}).get('title', '')
+            results.append({
+                "title": entry.title,
+                "url": entry.link,
+                "source": source_name
+            })
+    return results
 
-def search_live_news(query):
-    """Queries live news feeds with URL encoding to prevent control character errors."""
-    try:
-        encoded_query = quote(query)
-        url = f"https://news.google.com/rss/search?q={encoded_query}"
-        
-        feed = feedparser.parse(url)
-        
-        results = []
-        if hasattr(feed, 'entries'):
-            for entry in feed.entries:
-                results.append({
-                    "title": entry.title,
-                    "url": entry.link,
-                    "published": getattr(entry, "published", "Recent")
-                })
-        return results
-    except Exception as e:
-        st.error(f"Error fetching live news: {e}")
-        return []
-
-def calculate_credibility_score(articles, input_domain):
-    """Calculates credibility score based on verified outlet coverage."""
-    if not articles:
-        return 0, "No matching articles found in live news databases for this claim.", []
-
-    trusted_matches = []
-    other_matches = []
-
-    for item in articles:
-        link = item["url"].lower()
-        if any(td in link for td in trusted_domains):
-            trusted_matches.append(item)
-        else:
-            other_matches.append(item)
-
-    trusted_count = len(trusted_matches)
-    total_count = len(articles)
-
-    if trusted_count > 0:
-        score = (trusted_count * 25) + (total_count * 2)
-        if input_domain and any(td in input_domain for td in trusted_domains):
-            score += 15
-    else:
-        score = min(total_count * 3, 25)
-
-    score = min(max(score, 5), 96)
-
-    if score >= 70:
-        reasoning = f"High probability of truth ({score}%). Found {trusted_count} verified report(s) from major news networks."
-    elif score >= 40:
-        reasoning = f"Moderate credibility ({score}%). Partial coverage found, but key tier-1 networks have not confirmed full details."
-    else:
-        reasoning = f"Low credibility score ({score}%). Found {trusted_count} verified reports from monitored news networks."
-
-    combined_sources = trusted_matches + other_matches
-    return score, reasoning, combined_sources[:6]
+def clean_query(text):
+    words = re.sub(r'[^\w\s]', '', text.lower()).split()
+    keywords = [w for w in words if w not in STOP_WORDS]
+    return " ".join(keywords) if keywords else text
 
 # ---------------------------
-# Form Input Section
+# Analysis Engine
+# ---------------------------
+def analyze_url(url):
+    title, domain = scrape_article_data(url)
+    if not title:
+        return 0, "Unable to reach or read the provided URL.", []
+
+    is_monitored_domain = any(td in domain for td in trusted_domains)
+    search_query = clean_query(title)
+    related = fetch_rss_feed(search_query)
+
+    trusted_matches = [
+        item for item in related 
+        if any(brand in item['source'].lower() or brand in item['title'].lower() for brand in trusted_brands)
+    ]
+
+    if is_monitored_domain:
+        score = 95 if len(trusted_matches) >= 2 else 85
+        verdict = f"High Reality Score ({score}%). Published by monitored outlet '{domain}' and supported by live news feeds."
+    elif len(trusted_matches) >= 3:
+        score = 78
+        verdict = f"Moderate-High Reality Score ({score}%). Published externally, but corroborated by major news networks."
+    elif len(trusted_matches) >= 1:
+        score = 50
+        verdict = f"Partial Reality Score ({score}%). Limited matching coverage found across verified outlets."
+    else:
+        score = 15
+        verdict = f"Low Reality Score ({score}%). Unverified source with zero matching reports found in verified outlets."
+
+    return score, verdict, title, related[:5]
+
+def analyze_claim(claim):
+    claim_lower = claim.lower()
+    
+    # Check if user claim contains any action word (die, dead, arrested, etc.)
+    found_actions = [act for act in SENSITIVE_ACTIONS if act in claim_lower]
+    
+    search_query = clean_query(claim)
+    articles = fetch_rss_feed(search_query)
+
+    if not articles:
+        return 10, "Claim Unverified (10%). No live news reports found matching this query.", []
+
+    # Strict strict matching: Articles MUST match the action word if the claim contained one
+    exact_claim_matches = []
+    
+    for item in articles:
+        t_lower = item['title'].lower()
+        s_lower = item['source'].lower()
+        
+        is_trusted = any(brand in t_lower or brand in s_lower for brand in trusted_brands)
+        
+        if found_actions:
+            # Must contain at least one of the target action words in the article title
+            has_action_in_title = any(act in t_lower for act in found_actions)
+        else:
+            has_action_in_title = True
+
+        if is_trusted and has_action_in_title:
+            exact_claim_matches.append(item)
+
+    # Score Assignment
+    if len(exact_claim_matches) >= 3:
+        score = 92
+        verdict = f"Claim Verified ({score}%). Confirmed by multiple monitored news networks."
+    elif len(exact_claim_matches) >= 1:
+        score = 75
+        verdict = f"Claim Likely True ({score}%). Confirmed by verified news reports."
+    elif found_actions:
+        # If the claim was about death/arrest but 0 verified articles confirm that specific action
+        score = 15
+        verdict = f"Claim False / Unverified ({score}%). Monitored news networks do NOT report this claim."
+    else:
+        # General query with no specific sensitive action
+        score = 35
+        verdict = f"Uncertain Claim ({score}%). Missing direct confirmation from monitored networks."
+
+    display_sources = exact_claim_matches if exact_claim_matches else []
+    return score, verdict, display_sources
+
+# ---------------------------
+# UI Input & Display
 # ---------------------------
 user_input = st.text_area(
     "Enter Article URL or Claim:",
-    placeholder="Paste a link or news text here...",
+    placeholder="Paste news link (e.g., https://...) OR enter a claim (e.g., Did PM Modi die?)...",
     height=125
 )
 
 analyze = st.button("🔍 Run TruthLens Verification")
 
-# Monitored Domain Display
 st.write("")
 st.markdown("<p style='color: #ffffff; font-size: 0.95rem; font-weight: 700;'>🌐 Monitored News Networks:</p>", unsafe_allow_html=True)
 badges_html = "".join([f'<span class="domain-tag">🟢 {domain}</span>' for domain in trusted_domains])
 st.markdown(f'<div style="margin-bottom: 2rem;">{badges_html}</div>', unsafe_allow_html=True)
 
-# ---------------------------
-# Output Results Section
-# ---------------------------
-if analyze and user_input:
+if analyze and user_input.strip():
     st.divider()
-    
-    with st.spinner("Analyzing claims and cross-checking live sources..."):
-        input_domain = ""
-        if user_input.startswith("http://") or user_input.startswith("https://"):
-            extracted_title, input_domain = extract_title_and_domain(user_input)
+    input_str = user_input.strip()
+    is_url = input_str.startswith("http://") or input_str.startswith("https://")
+
+    with st.spinner("Processing input and cross-referencing news databases..."):
+        if is_url:
+            score, verdict, extracted_title, related_news = analyze_url(input_str)
             if extracted_title:
-                search_term = clean_search_query(extracted_title)
-                st.caption(f"**Extracted Article Title:** _{extracted_title}_")
-            else:
-                search_term = clean_search_query(user_input)
+                st.caption(f"**Read Article Title:** _{extracted_title}_")
         else:
-            search_term = clean_search_query(user_input)
+            score, verdict, related_news = analyze_claim(input_str)
 
-        articles = search_live_news(search_term)
-        score, reasoning, top_sources = calculate_credibility_score(articles, input_domain)
-
-    # Display Metrics and Analysis Breakdown
     st.markdown("### 📊 Verification Analysis")
     
     col1, col2 = st.columns(2)
     with col1:
-        st.metric("Truth/Credibility Score", f"{score}%")
+        st.metric("Reality / Credibility Score", f"{score}%")
     with col2:
-        st.metric("Matching News Reports", len(top_sources))
+        st.metric("Matching Verified Reports", len(related_news))
 
     st.write("")
     if score >= 70:
-        st.success(f"✅ **Verdict:** {reasoning}")
+        st.success(f"✅ **Verdict:** {verdict}")
     elif score >= 40:
-        st.warning(f"⚠️ **Verdict:** {reasoning}")
+        st.warning(f"⚠️ **Verdict:** {verdict}")
     else:
-        st.error(f"❌ **Verdict:** {reasoning}")
+        st.error(f"❌ **Verdict:** {verdict}")
 
-    # Display Relevant Articles
-    if top_sources:
+    if related_news:
         st.markdown("---")
-        st.subheader("📰 Relevant Articles & Live Coverage")
-        for idx, item in enumerate(top_sources, 1):
+        st.subheader("📰 Matching Verified Reports")
+        for idx, item in enumerate(related_news, 1):
             st.markdown(f"**{idx}.** [{item['title']}]({item['url']})")
