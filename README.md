@@ -37,28 +37,181 @@ flowchart TD
     B -->|Article URL| C["🌐 Extract Title & Domain"]
     B -->|Text Claim| D["📝 Clean & Process Claim"]
 
-    C --> E["🔎 Generate Search Query"]
+    C --> E["🔎 Query Generation"]
     D --> E
 
     E --> F["📰 Google News RSS"]
-    F --> G["📚 Retrieve Live News Results"]
+    F --> G["📚 Live News Results"]
 
-    G --> H["🔍 Match Monitored Sources"]
+    G --> H["🔍 Monitored Source Matching"]
 
     H --> I{"Corroborating Reports?"}
 
-    I -->|Yes| J["📊 Calculate Credibility Score"]
+    I -->|Yes| J["📊 Credibility Scoring"]
     I -->|No| K["⚠️ Low / Uncertain Confidence"]
 
-    J --> L["📋 Generate Verification Verdict"]
+    J --> L["📋 Verification Verdict"]
     K --> L
 
-    L --> M["🖥️ Streamlit Dashboard"]
-    M --> N["📊 Score + Matching Reports + Sources"]
+    L --> M["🖥️ TruthLens Dashboard"]
+    M --> N["📊 Score + Evidence + Sources"]
+```
 
-    N --> O["👤 User Reviews Evidence"]
-    O --> P["✅ Verification Complete"]
 ---
+
+## 📸 Application Demo
+
+### Main Interface
+
+![TruthLens Interface](screenshots/main-interface.png)
+
+### Verification Result
+
+![TruthLens Verification Result](screenshots/verification-result.png)
+
+---
+
+## ✨ Key Features
+
+- 🔗 **URL & Claim Verification** — Analyze article URLs or raw text claims.
+- 🧹 **Smart Query Cleaning** — Removes unnecessary characters and predefined stop words.
+- 📰 **Live News Retrieval** — Searches current Google News RSS results.
+- 🌐 **Source Corroboration** — Checks coverage across monitored news networks.
+- ⚠️ **Claim-Specific Matching** — Applies stricter matching for event-related claims.
+- 📊 **Explainable Scoring** — Uses predefined rules instead of a black-box prediction.
+- 🖥️ **Interactive Dashboard** — Displays credibility scores, verdicts, and supporting reports.
+- 🎨 **Custom UI** — Newspaper-inspired interface built with Streamlit and custom CSS.
+
+---
+
+## 🧠 Verification Logic
+
+### Article URL
+
+```text
+Article URL
+    ↓
+Extract Title + Domain
+    ↓
+Clean Search Query
+    ↓
+Search Live News
+    ↓
+Match Monitored Sources
+    ↓
+Calculate Score
+    ↓
+Generate Verdict
+```
+
+### Text Claim
+
+```text
+Text Claim
+    ↓
+Clean Query
+    ↓
+Detect Sensitive Actions
+    ↓
+Search Live News
+    ↓
+Match Relevant Reports
+    ↓
+Calculate Score
+    ↓
+Generate Verdict
+```
+
+The current implementation uses predefined rules and source corroboration rather than a trained machine-learning classification model.
+
+---
+
+## 📊 Scoring Model
+
+TruthLens uses a **rule-based credibility assessment**.
+
+| Evidence Pattern | Assessment |
+|---|---|
+| Multiple monitored reports corroborate the information | High confidence |
+| Some monitored coverage is available | Moderate confidence |
+| Limited or no corroborating coverage | Low / uncertain confidence |
+| Sensitive claim lacks matching reports | Low confidence |
+
+> **Note:** The credibility score represents the level of available supporting evidence. It is not an absolute determination that a claim is true or false.
+
+---
+
+## 🛠️ Technology Stack
+
+| Category | Technologies |
+|---|---|
+| Language | Python |
+| Frontend / UI | Streamlit |
+| Web Requests | Requests |
+| Web Parsing | BeautifulSoup4 |
+| RSS Processing | Feedparser |
+| News Retrieval | Google News RSS |
+| Text Processing | Python Regex |
+| UI Styling | HTML / CSS |
+
+---
+
+## 🔄 End-to-End Workflow
+
+```text
+User
+ ↓
+Article URL / Text Claim
+ ↓
+Input Processing
+ ↓
+Query Generation
+ ↓
+Live Google News RSS
+ ↓
+News Retrieval
+ ↓
+Source Matching
+ ↓
+Rule-Based Analysis
+ ↓
+Credibility Score
+ ↓
+Verification Verdict
+ ↓
+Supporting Reports
+```
+
+---
+
+## 📁 Project Structure
+
+```text
+truthlens-app/
+│
+├── app.py
+├── requirements.txt
+├── README.md
+└── screenshots/
+    ├── main-interface.png
+    └── verification-result.png
+```
+
+---
+
+## 🔬 Technical Highlights
+
+- Real-time RSS-based news retrieval
+- URL parsing and article-title extraction
+- Automated search-query cleaning
+- Trusted-source corroboration
+- Event-specific keyword matching
+- Explainable rule-based scoring
+- Interactive Streamlit dashboard
+- Custom HTML/CSS interface
+
+---
+
 ## 🚧 Limitations
 
 TruthLens is currently a **news-source corroboration system** rather than a complete automated fact-checking model.
@@ -69,7 +222,7 @@ The reliability of its assessment can be affected by:
 - 🔎 Search-result quality and relevance
 - ⏱️ Delays between an event occurring and news outlets reporting it
 - 📝 Differences in wording between articles covering the same event
-- 🌐 Coverage limitations of the monitored news sources
+- 🌐 Coverage limitations of monitored news sources
 - 📋 The predefined source and keyword matching rules
 
 > **Note:** The credibility score represents the level of available supporting evidence. It should not be interpreted as an absolute determination that a claim is true or false.
@@ -80,14 +233,12 @@ The reliability of its assessment can be affected by:
 
 The current system provides a foundation that can be extended with more advanced AI and NLP capabilities.
 
-Planned improvements include:
-
 - 🤖 **Semantic Similarity** — Compare claims and articles based on meaning rather than exact keywords.
 - 🧠 **NLP-Based Verification** — Use transformer-based models for deeper claim analysis.
 - 📰 **News Clustering** — Group multiple reports covering the same event.
 - 🌍 **Multilingual Verification** — Support claims and news sources in multiple languages.
-- 🔗 **Evidence Graphs** — Connect claims with their supporting and contradicting reports.
-- 🧩 **Named Entity Recognition** — Identify people, organizations, locations, and events within claims.
+- 🔗 **Evidence Graphs** — Connect claims with supporting and contradicting reports.
+- 🧩 **Named Entity Recognition** — Identify people, organizations, locations, and events.
 - 📈 **Historical Analytics** — Track news coverage and credibility patterns over time.
 - 🧪 **Model Evaluation** — Evaluate future ML-based verification models using labeled fact-checking datasets.
 
@@ -115,4 +266,5 @@ Interested in **AI, Data Science, VLSI, and intelligent information systems.**
 
 ## ⭐ Project
 
+If you find TruthLens interesting, consider giving the repository a ⭐ on GitHub.
 If you find TruthLens interesting, consider giving the repository a ⭐ on GitHub.
