@@ -58,3 +58,61 @@ flowchart TD
 
     N --> O["👤 User Reviews Evidence"]
     O --> P["✅ Verification Complete"]
+---
+## 🚧 Limitations
+
+TruthLens is currently a **news-source corroboration system** rather than a complete automated fact-checking model.
+
+The reliability of its assessment can be affected by:
+
+- 📰 Availability and freshness of live RSS results
+- 🔎 Search-result quality and relevance
+- ⏱️ Delays between an event occurring and news outlets reporting it
+- 📝 Differences in wording between articles covering the same event
+- 🌐 Coverage limitations of the monitored news sources
+- 📋 The predefined source and keyword matching rules
+
+> **Note:** The credibility score represents the level of available supporting evidence. It should not be interpreted as an absolute determination that a claim is true or false.
+
+---
+
+## 🔮 Future Improvements
+
+The current system provides a foundation that can be extended with more advanced AI and NLP capabilities.
+
+Planned improvements include:
+
+- 🤖 **Semantic Similarity** — Compare claims and articles based on meaning rather than exact keywords.
+- 🧠 **NLP-Based Verification** — Use transformer-based models for deeper claim analysis.
+- 📰 **News Clustering** — Group multiple reports covering the same event.
+- 🌍 **Multilingual Verification** — Support claims and news sources in multiple languages.
+- 🔗 **Evidence Graphs** — Connect claims with their supporting and contradicting reports.
+- 🧩 **Named Entity Recognition** — Identify people, organizations, locations, and events within claims.
+- 📈 **Historical Analytics** — Track news coverage and credibility patterns over time.
+- 🧪 **Model Evaluation** — Evaluate future ML-based verification models using labeled fact-checking datasets.
+
+---
+
+## 📝 Conclusion
+
+TruthLens demonstrates how **real-time web data, news-source corroboration, and explainable rule-based analysis** can be combined to build a practical news verification system.
+
+Instead of relying on a single article, the system searches for supporting coverage across multiple monitored news sources and presents the available evidence alongside its credibility assessment.
+
+The current implementation provides a foundation for extending the system toward **NLP, semantic analysis, and machine-learning-based fact verification**.
+
+---
+
+## 👩‍💻 Author
+
+**Harshima Joshi**
+
+B.Tech — VLSI / Electronics
+
+Interested in **AI, Data Science, VLSI, and intelligent information systems.**
+
+---
+
+## ⭐ Project
+
+If you find TruthLens interesting, consider giving the repository a ⭐ on GitHub.
