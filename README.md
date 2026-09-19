@@ -63,11 +63,15 @@ flowchart TD
 
 ### Main Interface
 
-![TruthLens Interface](screenshots/main-interface.png)
+The TruthLens interface allows users to enter either a news article URL or a claim for verification.
+
+![TruthLens Main Interface](screenshots/main-interface.png)
 
 ### Verification Result
 
-![TruthLens Verification Result](screenshots/verification-result.png)
+After processing the input, TruthLens displays a credibility score, verification verdict, and matching reports from monitored news sources.
+
+![TruthLens Verification Result](screenshots/verification-result-combined.png)
 
 ---
 
