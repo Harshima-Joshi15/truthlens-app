@@ -7,6 +7,15 @@ TruthLens is a Streamlit-based news verification application that helps users ev
 The system accepts an **article URL or text-based claim**, retrieves relevant live news results, compares them against monitored news sources, and generates a **rule-based credibility assessment** with supporting reports.
 
 ---
+## 🚀 Live Demo
+
+[![Try TruthLens Live](https://img.shields.io/badge/🚀_Try_TruthLens-Live_App-00A8E8?style=for-the-badge)](https://truthlens-news.streamlit.app/)
+
+**Live Application:**  
+[TruthLens | News Credibility Engine](https://truthlens-news.streamlit.app/)
+
+> Enter a news claim or article URL and view its credibility score, verification verdict, and matching reports from monitored news sources.
+---
 
 ## 🎯 Problem Statement
 
